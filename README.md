@@ -32,5 +32,5 @@ Each name, path or wildcard from the arguments is checked for validity against e
 **Use at your own risk.**
 
 ```
-$ rftop file1 [file2 ...]
+$ rftop FILE [FILE2 ...]
 ```
