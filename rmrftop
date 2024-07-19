@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# flag
+error=0
+
+# Check dependencies
+dependency_list=("tree" "dutree")
+
+for dependency in "${dependency_list[@]}"
+do
+    if ! command -v $dependency &>/dev/null ; then
+        echo $dependency missing. >&2
+        error=1
+    fi
+done
+
+# Check input
+if [ $# -eq 0 ]; then
+    echo "Nothing to rm."
+    error=1
+else
+    for arg in "$@"; do
+        if ! [ -d "$arg" ] && ! [ -f "$arg" ] && ! [ -L "$arg" ]; then
+            echo -e "\e[1;33m$arg\e[0m\tdoes not exist, or not an rm-able type." >&2
+            error=1
+        fi
+    done
+fi
+
+# exit on any error
+if [ "$error" -ne 0 ] ; then
+    exit
+fi
+
+# disk usage tree real sizes summary
+# dutree will print an error line for every io error
+# count them, and if more than zero, display a summary
+dutree -us "$@" 2> >(count=$(wc -l) && [ $count -gt 0 ] && echo -e "\e[31mCouldn't read $count entries\e[0m" >&2)
+
+# tree all files recursive
+# only view the last line which is the total count
+echo Removing `tree -aR "$@" | tail -n 1`
+
+# Warn if root
+if [ $(id -u) -eq 0 ] ; then
+    echo -e "\e[1;31mRunning with root privileges!\e[0m"
+    isroottext=' sudo'
+else
+    isroottext=''
+fi
+
+# Confirm rm
+read -p "Proceed with$isroottext rm -rf? (y/N): " -r proceed
+echo
+
+if [[ $proceed =~ ^([Yy]|yes|Yes|YES)$ ]] ; then
+    rm -rfv "$@" | echo "$(wc -l) removed."
+fi
