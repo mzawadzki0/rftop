@@ -1,5 +1,7 @@
 #!/bin/bash
 
+starttime=`date +%s`
+
 # flag
 error=0
 
@@ -49,7 +51,12 @@ else
     isroottext=''
 fi
 
-# Confirm rm
+# Make sure to wait a bit
+if [ $((`date +%s`-$starttime)) -le 1 ] ; then
+    sleep 1
+fi
+
+# Prompt to confirm rm
 read -p "Proceed with$isroottext rm -rf? (y/N): " -r proceed
 echo
 
