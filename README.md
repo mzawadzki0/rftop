@@ -1,8 +1,6 @@
 # rftop
 
-A simple wrapper script for `rm -rf`.
-
-It displays a summary of counts and sizes, as well as a single prompt for confirmation.
+A simple wrapper script for `rm -rf`. It displays a summary of file counts and sizes, as well as a single prompt for confirmation.
 
 # Prerequisites
 
@@ -21,7 +19,7 @@ git clone https://github.com/mzawadzki0/rftop
 cd rftop
 chmod u+x rftop
 ```
-...and symlink the file to one of the direcories in PATH.
+...and symlink or move the file to one of the direcories in PATH.
 
 # Usage
 
