@@ -1,6 +1,6 @@
 # rftop
 
-A simple wrapper script for `rm -rf`. It displays a summary of file counts and sizes, as well as a single prompt for confirmation.
+A simple wrapper script for `rm -rf` which displays a summary of file counts and sizes, and asks for confirmation.
 
 # Prerequisites
 
