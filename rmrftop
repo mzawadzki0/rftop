@@ -35,11 +35,11 @@ fi
 # disk usage tree real sizes summary
 # dutree will print an error line for every io error
 # count them, and if more than zero, display a summary
-dutree -us "$@" 2> >(count=$(wc -l) && [ $count -gt 0 ] && echo -e "\e[31mCouldn't read $count entries\e[0m" >&2)
+dutree -us "$@" 2> >(count=$(wc -l) && [ $count -gt 0 ] && echo -e "\e[31mdutree: Couldn't read $count entries\e[0m" >&2)
 
 # tree all files recursive
 # only view the last line which is the total count
-echo Removing `tree -aR "$@" | tail -n 1`
+echo Removing `tree -aRUin "$@" | tail -n 1`
 
 # Warn if root
 if [ $(id -u) -eq 0 ] ; then
