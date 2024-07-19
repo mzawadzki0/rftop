@@ -17,8 +17,8 @@ from your distro's package manager.
 # Installation
 
 ```
-git clone https://github.com/mzawadzki0/rmrftop
-cd rmrftop
+git clone https://github.com/mzawadzki0/rftop
+cd rftop
 chmod u+x rftop
 ```
 ...and symlink the file to one of the direcories in PATH.
